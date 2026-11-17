@@ -1,0 +1,7 @@
+<td>{{ user.id }}</td>
+<td>{{ user.username }}</td>
+<td>{{ user.role }}</td>
+<td>
+  <button [disabled]="user.role === 'admin'" (click)="obrisiKorisnika($event)" type="button">Obriši</button>
+</td>
+<!-- dugme sada poziva metodu koja emituje dogadjaj odnosno korisnika-->

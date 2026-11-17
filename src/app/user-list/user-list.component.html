@@ -1,0 +1,35 @@
+<div>
+  <label for="username">Pretraga korisnika</label>
+  <input
+    id="username"
+    type="text"
+    [value]="pretraga()"
+    (input)="pretraga.set($any($event.target).value)"
+  />
+  <button [disabled]="pretraga().trim() === ''" (click)="filtriraniKorisnici()" type="button">Pretrazi</button>
+</div>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>UserName</th>
+    <th>Role</th>
+    <th>Akcije</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (u of filtriraniKorisnici(); track u.id) {
+      <!--
+      Za svakog korisnika pravimo instancu user card i osluskujemo event koji se desi kada korisnik pritisne dugme obrisi
+      Dete salje this.user jer svaka instanca ima zasebno svog usera pa je to bukvalno na kojoj se instanci nezavisnoj se desio event
+      i sada osluskujemo $event koji je zapravo objekat user jer iz deteta saljemo this.user kada se desi brisanje
+       -->
+      <tr app-user-card [routerLink] = "['/user-list', u.id]" [user]="u" (deleteClicked)="obrisiKorisnika($event)"></tr>
+    } @empty {
+      <tr>
+        <td colspan="4">Nema naloga.</td>
+      </tr>
+    }
+  </tbody>
+</table>
+

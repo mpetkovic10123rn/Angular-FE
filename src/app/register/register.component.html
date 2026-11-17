@@ -1,0 +1,26 @@
+<form [formGroup]="form" (ngSubmit)="onClick()">
+  <div class="polje">
+    <label for="username">Korisničko ime</label>
+    <input id="username" type="text" formControlName="username" />
+    @if (form.controls.username.touched && form.controls.username.errors?.['required']) {
+      <p class="greska">Korisničko ime je obavezno</p>
+    }
+  </div>
+
+  <div class="polje">
+    <label for="password">Lozinka</label>
+    <input id="password" [type]="showPass() ? 'text' : 'password'" formControlName="password" />
+  </div>
+
+  <div class="polje">
+    <label for="confirmPassword">Potvrda lozinke</label>
+    <input id="confirmPassword" [type]="showPass() ? 'text' : 'password'" formControlName="confirmPassword" />
+    @if (form.controls.confirmPassword.touched && form.errors?.['mismatch']) {
+      <p class="greska">Lozinke se ne poklapaju</p>
+    }
+  </div>
+  <button type="submit" [disabled]="form.invalid || isLoading()">Registruj se</button>
+</form>
+<button (click) = "hideOrShow()" type="button">Prikazi lozinku</button>
+<button (click) = "clean()" type="button">Ocisti polja</button>
+<p>{{poruka()}}</p>

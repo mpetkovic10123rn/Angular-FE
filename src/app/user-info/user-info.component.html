@@ -1,0 +1,8 @@
+@if (korisnik(); as k) {
+  <p>ID: {{ k.id }}</p>
+  <p>Ime: {{ k.username }}</p>
+  <p>Uloga: {{ k.role }}</p>
+} @else {
+  <p>Korisnik ne postoji.</p>
+}
+<button routerLink="/user-list" type="button">Nazad</button>

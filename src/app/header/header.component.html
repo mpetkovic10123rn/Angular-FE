@@ -1,0 +1,9 @@
+@if (currentUser() === null){
+  <p>Dobrodosli!</p>
+} @else{
+<p>Hello, {{currentUser()?.username}}</p>
+<button (click)="logout()" type="button">Log Out</button>
+  @if (currentUser()?.role === 'admin') {
+    <a routerLink="/user-list">Korisnici</a>
+  }
+}

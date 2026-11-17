@@ -1,0 +1,32 @@
+<form [formGroup]="form" (ngSubmit)="onClick()">
+
+  <div class="polje">
+    <label for="username">Korisničko ime</label>
+    <input id="username" type="text" formControlName="username" />
+  </div>
+
+  <div class="polje">
+    <label for="password">Lozinka</label>
+    <input id="password" [type]="showPass() ? 'text' : 'password'" formControlName="password" />
+  </div>
+
+  <button [disabled]="form.invalid || isLoading() || !isLoaded() || remainingSeconds() > 0" type="submit"> {{ isLoading() ? 'Prijavljivanje...' : 'Prijavi se' }}</button>
+</form>
+
+<button (click) = "hideOrShow()" type="button">Prikazi lozinku</button>
+<button (click) = "clean()" type="button">Ocisti polja</button>
+<button (click)="register()" )>Registruj se.</button>
+<p>Broj pokusaja {{counter()}}</p>
+<input id="remember" type="checkbox" [checked]="rememberMe()" (change)="rememberMe.set($any($event.target).checked)"/>
+<label for="remember"> Zapamti me.</label><br>
+@if (isValid() === true) {
+  <p>Dobrodosao, {{ currentUser()?.role === 'admin' ? 'admine' : 'korisnice' }} !</p>
+} @else if (isValid() === false) {
+  <p>Uneli ste loše podatke ili korisnik ne postoji</p>
+}
+@if (loadError() !== '') {
+  <p> {{loadError()}} </p>
+}
+@if (remainingSeconds() > 0) {
+  <p>Previse neuspesnih pokusaja {{this.remainingSeconds() }}</p>
+}

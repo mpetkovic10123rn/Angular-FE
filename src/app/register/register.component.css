@@ -1,0 +1,18 @@
+form {
+  display: flex;
+  flex-direction: column;   /* deca forme se redaju jedno ispod drugog */
+  gap: 16px;                /* razmak između polja */
+  max-width: 320px;
+}
+
+.polje {
+  display: flex;
+  flex-direction: column;   /* labela iznad inputa */
+  gap: 4px;
+}
+
+.greska {
+  color: #c0392b;
+  font-size: 0.85rem;
+  margin: 0;
+}
